@@ -8,9 +8,14 @@ overview: |
   Hourly measurements of electricity load (consumption) and price signals for Egypt.
   Suitable for short-term load forecasting, price prediction, consumption pattern
   analysis, and electricity bill estimation.
+  
+  In this project, we focus on calculating and predicting **electricity bills**. The approach involves:
+  1. Using historical load (`L(T)`, `L(T-1)`, etc.) and price (`P(T-1)`, `P(T-2)`, etc.) data to estimate total electricity usage.
+  2. Computing the **monthly electricity bill** using price and load formulas.
+  3. Training a regression model to **predict future electricity bills** based on usage patterns and pricing history.
 structure:
   - column: "L(T)"
-    description: "Load at current hour (target)"
+    description: "Load at current hour (used in bill calculation)"
     example: 1125.7
   - column: "L(T-1)"
     description: "Load 1 hour ago"
@@ -52,7 +57,7 @@ data_quality:
     - Verify units (MW or kW) depending on dataset subset.
 project_usage:
   project: "Electricity Bill Prediction"
-  target_variable: "L(T)"
+  target_variable: "Electricity Bill (calculated from load and price)"
   features:
     - "L(T-1)"
     - "L(T-2)"
@@ -64,7 +69,9 @@ project_usage:
     - "P(T-48)"
     - "Day"
     - "Season"
-  goal: "Estimate monthly electricity charges using hourly load & price features."
+  goal: |
+    Compute and predict the **monthly electricity bill** using historical consumption and pricing data.
+    The bill is derived by combining load and price information to estimate cost per hour and then aggregating over time.
 example_visualization: |
   # Example: average daily load trend
   import seaborn as sns
@@ -77,6 +84,7 @@ citation: |
   Youssef, M. (2020). Electricity Load and Price Forecasting Dataset. Mendeley Data, V1.
   DOI: 10.17632/jxm8d4w4cv.1
 additional_notes: |
-  - This YAML is intended as a data overview file for your repo. Keep it next to your
-    README or inside a `data/` folder. Update `rows_estimate` and `period` once you
-    download the exact subset you will use.
+  - This YAML describes the data used to calculate and predict electricity bills.
+  - Keep this file in the `data/` folder for documentation.
+  - Update `rows_estimate` and `period` once you confirm the dataset subset.
+  - You can later include a formula reference for how the bill is calculated (e.g., `Bill = Load × Price`).
