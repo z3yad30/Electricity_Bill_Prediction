@@ -112,6 +112,23 @@ for i in range(n):
 
 df = pd.DataFrame(rows)
 # Save CSV
+
+for idx in df.index:
+    if (idx + 1) % 300 == 0:
+        df.at[idx, 'month'] = None
+    if (idx + 1) % 120 == 0:
+        df.at[idx, 'season'] = None
+    if (idx + 1) % 1000 == 0:
+        df.at[idx, 'temperature'] = None
+    if (idx + 1) % 1500 == 0:
+        df.at[idx, 'price_per_kwh'] = None
+    if (idx + 1) % 200 == 0:
+        df.at[idx, 'city'] = None
+    if (idx + 1) % 70 == 0:
+        df.at[idx, 'building_type'] = None
+    if (idx + 1) % 500 == 0:
+        df.at[idx, 'consumption_kwh'] = None
+
 out_path = "Raw_Data.csv"
 df.to_csv(out_path, index=False)
 
